@@ -6,11 +6,12 @@
 Базовая архитектура на React с хуками.
 Проект маленький, поэтому не вижу смысла усложнять его Redux.
 
-`pages/`            #страницы
-`components/`       #компоненты
+`pages/`            страницы
+`components/`       компоненты
 
-`React Router`                      #для роутинга
-`ProtectedRoute` и `PublicRoute`    #защита маршрутов 
+`React Router`                      для роутинга
+`ProtectedRoute` и `PublicRoute`    защита маршрутов 
+
 Состояние авторизации хранится в localStorage
 
 
