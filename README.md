@@ -3,42 +3,53 @@
 
 ## Архитектура
 
-Базовая архитектура на React с хуками.
-Проект маленький, поэтому не вижу смысла усложнять его Redux.
+ React с хуками, Context api для управления состоянием.
 
-`pages/`            #страницы
-`components/`       #компоненты
+- `services` — работа с api
+- `utils` — валидация
+- `context` — глобальное состояние 
+- `components` — компоненты
+- `pages` — страницы приложения
 
-`React Router`                      #для роутинга
-`ProtectedRoute` и `PublicRoute`    #защита маршрутов 
-Состояние авторизации хранится в localStorage
-
-
+Роутинг через `React Router` с защитой маршрутов (`ProtectedRoute` и `PublicRoute`).
+Состояние авторизации сохраняется в localStorage.
 
 
 ## Файловая структура
 
 ```
-ProtectedRoute.jsx      # Защита приватных маршрутов
-PublicRoute.jsx         # Защита публичных маршрутов
+components/
+        ProtectedRoute.jsx      # Защита приватных маршрутов
+        PublicRoute.jsx         # Защита публичных маршрутов
+        UsersTable.jsx          # Таблица 
+        UsersTable.css          # Стили
 
-SignIn.jsx          # Страница входа
-UsersPage.jsx       # Страница пользователя
-UsersPage.css       # Стили
+context/
+        AuthContext.jsx        # Управление авторизацией
+        UsersContext.jsx       # Управление данными пользователей
 
-App.jsx             # Роутинг
-App.css             # Стили 
-main.jsx            # Точка входа
-main.css            # Cтили
+ pages/
+        SignIn.jsx             # Страница входа
+        UsersPage.jsx          # Страница пользователя
+        UsersPage.css          # Стили
 
-vite.config.js      #сервер/сборщик
+services/
+        api.js                 # Запросы к fakerapi
+
+utils/
+        validation.js          # Валидация форм
+
+App.jsx         # Роутинг
+App.css         # Стили           
+main.jsx        # Точка входа
+main.css        # Стили
 ```
 
 ## Библиотеки
 
-- **React** 
-- **React Router DOM** 
-- **Vite** 
+- **React** — UI
+- **React Router DOM** — роутинг
+- **Vite** — сервер и сборка 
 
 
 ## Запуск проекта
@@ -48,12 +59,13 @@ vite.config.js      #сервер/сборщик
 npm install
 ```
 
-2. Запустить сервер:
+2. Запустить dev-сервер:
 ```bash
 npm run dev
 ```
 
-Проект откроется на `http://localhost:5173` 
+Проект откроется на `http://localhost:5173`
 
-Чтобы скинуть сессию и вернуться на sign-in нужно очистить ls (localStorage.clear()) и обновить страницу
+Для сбросасессии нужнл очистить localStorage в консоли: localStorage.clear()
+
 

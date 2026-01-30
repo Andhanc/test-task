@@ -1,10 +1,11 @@
 import { Navigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 function PublicRoute({ children }) {
-  const isAuthenticated = localStorage.getItem('isAuthenticated')
+  const { isAuthenticated } = useAuth()
   
   if (isAuthenticated) {
-    return <Navigate to="/main" replace />
+    return <Navigate to="/" replace />
   }
   
   return children

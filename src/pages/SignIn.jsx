@@ -1,56 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { validateEmail, validatePassword } from '../utils/validation'
 import '../App.css'
 
 function SignIn() {
   const navigate = useNavigate()
+  const { login } = useAuth()
   
   useEffect(() => {
     document.title = 'Вход - Авторизация'
-    
-    const isAuthenticated = localStorage.getItem('isAuthenticated')
-    if (isAuthenticated) {
-      navigate('/main', { replace: true })
-    }
-  }, [navigate])
+  }, [])
+  
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
   const [showPassword, setShowPassword] = useState(false)
-
-  const validateEmail = (email) => {
-    if (!email) {
-      return 'Email обязателен для заполнения'
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return 'Некорректный формат email (пример: example@gmail.com)'
-    }
-    return ''
-  }
-
-  const validatePassword = (password) => {
-    if (!password) {
-      return 'Пароль обязателен для заполнения'
-    }
-
-    if (password.length < 6) {
-      return 'Пароль должен содержать минимум 6 символов'
-    }
-
-    const digitCount = (password.match(/\d/g) || []).length
-    if (digitCount < 2) {
-      return 'Пароль должен содержать минимум две цифры'
-    }
-
-    const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
-    if (!specialCharRegex.test(password)) {
-      return 'Пароль должен содержать минимум один специальный символ'
-    }
-
-    return ''
-  }
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
@@ -80,8 +46,8 @@ function SignIn() {
     })
     
     if (!emailError && !passwordError) {
-      localStorage.setItem('isAuthenticated', 'true')
-      navigate('/main')
+      login()
+      navigate('/')
     }
   }
 
